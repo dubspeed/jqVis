@@ -2,27 +2,42 @@ namespace("jqvis");
 
 (function() {
 	
-	var _html = "";
+	var _html = "",
+		_DOM = undefined,
 	
-	var sethtml = function(html) {
-		if (typeof html !== "string") {
-			throw {
-				name:"TypeError",
-				message:"setHTML only accepts strings"
+		sethtml = function(html) {
+			if (typeof html !== "string") {
+				throw {
+					name:"TypeError",
+					message:"setHTML only accepts strings"
+				}
 			}
+			_html = html;
+			_DOM = undefined;
+		},	
+	
+		gethtml = function() {
+			return _html;
+		},
+	
+		getDOM = function() {
+			if (typeof _DOM == "undefined") {
+				_DOM = $("<div>").html(_html);
+			}
+			return _DOM;
+		},
+	
+		query = function(q, mark) {
+			$(q, getDOM()).addClass(mark);
+		},
+		
+		clear = function(mark) {
+			$("." + mark, getDOM()).removeClass(mark);
 		}
-		_html = html;
-	};	
-	
-	var gethtml = function() {
-		return _html;
-	}
-	
-	var getDOM = function() {
-		return $("<div>").html(_html);
-	}
 	
 	jqvis.setHTML = sethtml;
 	jqvis.getHTML = gethtml;
 	jqvis.getDOM = getDOM;
+	jqvis.query = query;
+	jqvis.clear = clear;
 }());

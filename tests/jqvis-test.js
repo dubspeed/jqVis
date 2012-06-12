@@ -48,6 +48,20 @@ TestCase ("jqVisTest", {
 		assertEquals("test", $("#test", dom).text());
 	},
 	
+	"test should mark a query": function() {
+		var html = "<html><body><p id='test'>test</p></body></html>";
+		var mark = "__BOM__";
+		jqvis.setHTML(html);
+		jqvis.query("p#test", mark);
+		assert($("#test", jqvis.getDOM()).hasClass(mark));
+	},
 	
+	"test should remove all marks from html": function() {
+		var html = "<html><body><p class='__B__'>test</p><p class='__B__'>foo</p></body></html>";
+		var mark = "__B__";
+		jqvis.setHTML(html);
+		jqvis.clear(mark);
+		assertFalse($("p", jqvis.getDOM()).hasClass(mark))
+	}
 	
 });
