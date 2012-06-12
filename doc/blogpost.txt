@@ -1,0 +1,38 @@
+The JQuery Visualizer
+
+I wrote this little tool to dive deeper into JS and jquery. The Tool aims to help you create you Jquery selection live online.
+All you need to do is paste your html file into the texteditor and write you queries on it.
+
+The software renders your webpage live in the right frame and highlights your sourcecode as you write queries in the left frame.
+
+Lets take a look into the code and see how it works:
+
+I am going to apply the MVC pattern, splitting the code into a model, view and controller section. 
+I keep the model and the data out of the DOM which differ from the naive implementation of the solution.
+
+The Model
+- keep state: handle secret_dom / and or the highlights and selected jquery results
+
+model class:
+Handle state and data:
+    secret_dom: {}
+    query_result: {}    // last result
+    query: string       // the current query -> = input element?
+    uploaded_html: {}   // editor content 
+
+View
+- handle events like show, click, toggle etc. 
+- user input handling and communication towards the user
+- most jquery calls should get handled here 
+
+Controller 
+- handle jquery calls (loosely coupled ? -> stubbing?)
+- build view and DOM from model (inject html from model into iframe)
+- create results and operate on the model
+- have interface towards view
+  what interface?
+    setData = takes html code from the editor and stores it into the mode
+    query = execute a jquery on the model and return a result
+    render = returns the dom from the model to render in the iframe
+  
+  

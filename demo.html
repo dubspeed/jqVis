@@ -1,0 +1,77 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="lib/codemirror.css">
+	<link rel="stylesheet" type="text/css" href="jqvis.css"></link>
+	<script src="lib/codemirror.js"></script>
+	<script src="lib/mode/xml/xml.js"></script>
+    <script src="lib/mode/javascript/javascript.js"></script>
+    <script src="lib/mode/css/css.js"></script>
+    <script src="htmlmixed.js"></script>
+	<script src="lib/jquery_1.7.2_dev.js" type="text/javascript" charset="utf-8"></script>
+	<script src="src/jqvis.js" type="text/javascript" charset="utf-8"></script>
+	<script src="src/model.js" type="text/javascript" charset="utf-8"></script>
+	<script src="src/controller.js" type="text/javascript" charset="utf-8"></script>
+	<script src="src/demo.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <header class="softshadow">
+        <h1>JQuery Visualizer</h1>
+        <ul class="mainmenu group">
+            <li id="menu_load" class="button softshadow">load</li>
+            <li id="menu_edit" class="button softshadow">edit</li>
+        </ul>
+    </header>
+
+    <div id="load">
+       <h2>load a file</h2>
+       <a href="#" class="button">load</a>
+        <form>
+            <label for="filename">select file</label>
+            <input type="file" name="filename" id="filename"/>
+        </form>
+    </div>
+
+    <section id="querysection" class="section softshadow">
+        <div><textarea id="query" cols="50">$('');</textarea></div>
+        <div><span id="submit" class="button">query</span></div>
+    </section>
+    
+    <div class="rows">
+        <div class="section softshadow leftarea">
+            <form>
+            <textarea id="editor" name="editor">
+            
+  <html>
+  <head>
+    <title>Simple</title>
+  </head>
+  <body>
+    <h1>HTML Example</h1>
+    <p>This is a nice text paragraph</p>
+    <p>Another paragrpah, this time with div insdide
+       <div>a div</div> <div> another</div><br/>
+       <strong>huhu</strong><br/>
+    </p>
+    <ul>
+    <li>one</li>
+    <li>two</li>
+    <li>three</li>
+    </ul>
+  </body>
+</html>
+    
+            
+            
+            </textarea>
+            </form>
+        </div>
+        <div class="rightarea">
+	        <iframe id="render_window" seamless><p>IFrames not supported</p></iframe>
+        </div>
+    </div>
+
+    <footer>
+    </footer>
+
+</body>
+</html>

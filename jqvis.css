@@ -1,0 +1,105 @@
+body {
+	background-color: white;    
+	font-family: 'Arial';
+}
+
+header {
+    background-color: #555555;
+    color: #FFFFFF;
+}
+
+header h1 {
+    padding: 5px 5px 5px 5px;  
+}
+
+.mainmenu {
+    list-style-type: none;
+    float: right;
+    position: relative;
+    top: -75px;
+    
+}
+.mainmenu li {
+	margin: 10px 10px 10px 10px;
+    float: left;
+}
+
+.button {
+	padding: 10px 20px 10px 20px;
+    background-color: #CCCCCC;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    color: #FFFFFF;
+}
+
+.softshadow {
+    -moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.63);
+    -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.63);
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.63);
+}
+
+.section {
+	background-color: #F0EEEE;
+	padding: 25px 5px 5px 5px;
+}
+
+section textarea {
+	rows: 100;
+	resize: none;
+}
+
+.rows {
+	list-style: none;
+	margin-top: 25px;
+}
+
+.leftarea {
+	width: 40%;
+	float: left;
+	height: 99%;
+}
+.rightarea {
+	float: right;
+	width: 55%;
+}
+.rightarea iframe {
+	width: 99%;
+	height: 100%;
+}
+
+.leftarea #editor {
+	float: none;
+	width: 100%;
+}
+
+.highlight_line {
+	background-color: #FF0000;
+}
+
+.CodeMirror {
+/*	border: 1px solid black;*/
+
+}
+
+.CodeMirror-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  width: 100%
+}
+
+/* Clearfix */
+
+.group:before,.group:after {
+	content: "";
+	display: table;
+}
+
+.group:after {
+	clear: both;
+}
+
+.group {
+	zoom: 1; /* IE6&7 */
+}
