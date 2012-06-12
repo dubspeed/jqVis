@@ -18,6 +18,11 @@ namespace("jqvis");
 		return _html;
 	}
 	
+	var getDOM = function() {
+		return $("<div>").html(_html);
+	}
+	
 	jqvis.setHTML = sethtml;
 	jqvis.getHTML = gethtml;
+	jqvis.getDOM = getDOM;
 }());
