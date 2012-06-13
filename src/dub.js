@@ -13,6 +13,18 @@
 	};
 	
 	global.namespace = namespace;
-
+	
+	namespace("util");
+	
+	// returns # of token occurences in string
+	util.count = function(token, string) {
+		var nr = 0;
+		while (string.indexOf(token) != -1) {
+			nr += 1;
+			string = string.slice(string.indexOf(token)+1);
+		}
+		return nr;
+	};
+	
 }(this));
 

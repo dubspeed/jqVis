@@ -1,4 +1,4 @@
-TestCase("DubTests", {
+TestCase("NamespaceTests", {
 	
 	"test global should have a method namespace": function() {
 		assertFunction(namespace);
@@ -21,3 +21,10 @@ TestCase("DubTests", {
 		assertObject(its.name.is.awsome);
 	}
 }); 
+
+TestCase("CountTests", {
+	"test count method in util namespace": function () {
+		var str ="der test der test ist super der test";
+		assertEquals(3, util.count("der test", str));
+	}
+})
