@@ -66,14 +66,6 @@ TestCase ("jqVisTest", {
 		assertObject($("mark", jqvis.getDOM())[0]);
 	},
 	
-	"test should remove all marks from html": function() {
-		var html = "<html><body><p class='__B__'>test</p><p class='__B__'>foo</p></body></html>";
-		var mark = "<mark>";
-		jqvis.setHTML(html);
-		jqvis.clear(mark);
-		assertFalse($("p", jqvis.getDOM()).hasClass(mark))
-	},
-	
 	"test ascii html should reflect DOM manipulation": function() {
 		var html = "<html><body><p id='test'>test</p></body></html>";
 		var mark = "<mark>";
@@ -84,12 +76,6 @@ TestCase ("jqVisTest", {
 		assertEquals(markedHtml, jqvis.getHTML());
 	},
 	
-	/*"test should access html by line number": function() {
-		var html = "<html>\n<body>\n<p id='test'>test</p>\n</body>\n</html>\n";
-		jqvis.setHTML(html);
-		assertEquals("</body>", jqvis.getLine(3));
-	},
-	*/
 	"test should return all line-numbers where matching class __B__ items are found": function() {
 		var html = "<html>\n<body>\n<mark><p>test</p></mark>\n<mark><p>foo</p></mark>\n</body>\n</html>\n";
 		var mark = "<mark>";
@@ -111,7 +97,7 @@ TestCase ("jqVisTest", {
 	
 	"test no markers are left in html code after query": function() {
 		var html = "<div>\nNot selected\n</div>\n<p>This\nis\nSparta!</p>\n";
-		var mark = "__B__";
+		var mark = "<mark>";
 		jqvis.setHTML(html);
 		jqvis.query("p", mark);
 		var result = jqvis.getLines(mark);

@@ -37,7 +37,7 @@ namespace("jqvis");
 		},
 		
 		clear = function(mark) {
-			$(mark, getDOM()).unwrap(mark);
+			html = $(mark, getDOM()).children().unwrap(mark);
 			updateHTMLfromDOM();
 		},
 		
@@ -45,14 +45,6 @@ namespace("jqvis");
 			var lines = "";
 			var result = [];
 			
-			// mark inner html with markers to select in the string
-			//$("." + mark, getDOM()).each(function(idx, el) {
-			//	var html = $(el).parent().html();
-			//	$(el).wrap("<mark>");
-			//});
-			$("." + mark, getDOM()).wrap("<mark>");
-			updateHTMLfromDOM();
-
 			lines =  _html.split("\n");
 			var mode = "end";
 			for (var i = 0; i < lines.length; i += 1){
@@ -66,11 +58,8 @@ namespace("jqvis");
 					mode = "end";
 				}
 			}
-			$("." + mark, getDOM()).unwrap();
-			clear(mark);
+			clear("mark");
 			
-			// Remove start / end
-			//jstestdriver.console.log($("." + mark, getDOM()).first().parent().html())	
 			return result;
 		};
 	
