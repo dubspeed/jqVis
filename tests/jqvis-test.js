@@ -76,11 +76,60 @@ TestCase ("jqVisTest", {
 		assertEquals(markedHtml, jqvis.getHTML());
 	},
 	
-	"test should return all line-numbers where matching class __B__ items are found": function() {
+});
+
+TestCase ("jqvis.setMarkTests", {
+	"test setMark should be present": function() {
+		assertNotUndefined(jqvis["setMark"]);
+	},
+	
+	"test setMark requires html tags as marks": function () {
+		assertException(function() {
+			jqvis.setMark("test", "test");
+		}, "TypeError");
+		assertNoException(function() {
+			jqvis.setMark("<mark>", "</mark>");
+		});
+	},
+	
+	"test marks should be set": function() {
+		jqvis.setMark("<mark>","</mark>");
+		assertEquals("<mark>", jqvis.getOpenMark());
+		assertEquals("</mark>", jqvis.getCloseMark());
+	},
+	
+	"test markTag should be = mark without <>": function() {
+		jqvis.setMark("<mark>","</mark>");
+		assertEquals("mark", jqvis.getMarkTag());
+	}
+});
+
+TestCase ("jqvis.GetLineTsts", {
+	setUp: function() {
+		this.vis = Object.create(jqvis);
+	},
+	
+	"test should throw if no mark is set": function () {
+		var html = "<html>\n<body>\n<p>test</p>\n<p>foo</p>\n</body>\n</html>\n";
+		this.vis.setHTML(html);
+		assertException(function(){
+			this.vis.getLines();
+		}, "TypeError");
+	}, 
+	
+	"test should throw if no html is set": function () {
+		this.vis.setHTML("");
+		this.vis.setMark("<mark>", "</mark>");
+		assertException(function(){
+			this.vis.getLines();
+		}, "TypeError");
+	},
+	
+	"test should return all line-numbers where matching 'mark'": function() {
 		var html = "<html>\n<body>\n<mark><p>test</p></mark>\n<mark><p>foo</p></mark>\n</body>\n</html>\n";
 		var mark = "<mark>";
-		jqvis.setHTML(html);
-		var result = jqvis.getLines(mark);
+		this.vis.setHTML(html);
+		var result = this.vis.getLines(mark);
 		assertArray(result);
 		assertEquals(2, result.length);
 		assertEquals([2,3], result);
@@ -89,23 +138,21 @@ TestCase ("jqVisTest", {
 	"test getLines should work with multiple linesbreaks": function() {
 		var html = "<div>\nNot selected\n</div>\n<p>This\nis\nSparta!</p>\n";
 		var mark = "<mark>";
-		jqvis.setHTML(html);
-		jqvis.query("p", mark);
-		var result = jqvis.getLines(mark);
+		this.vis.setHTML(html);
+		this.vis.query("p", mark);
+		var result = this.vis.getLines(mark);
 		assertEquals([3,4,5], result);
 	},
 	
 	"test no markers are left in html code after query": function() {
 		var html = "<div>\nNot selected\n</div>\n<p>This\nis\nSparta!</p>\n";
 		var mark = "<mark>";
-		jqvis.setHTML(html);
-		jqvis.query("p", mark);
-		var result = jqvis.getLines(mark);
-		jstestdriver.console.log(jqvis.getHTML());
-		assertEquals(-1, jqvis.getHTML().indexOf(mark));
-		assertEquals(-1, jqvis.getHTML().indexOf("mark"));
-		assertEquals(html, jqvis.getHTML());
+		this.vis.setHTML(html);
+		this.vis.query("p", mark);
+		var result = this.vis.getLines(mark);
+		assertEquals(-1, this.vis.getHTML().indexOf(mark));
+		assertEquals(-1, this.vis.getHTML().indexOf("mark"));
+		assertEquals(html, this.vis.getHTML());
 	}
-	
-	
+
 });
