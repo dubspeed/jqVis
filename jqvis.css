@@ -50,7 +50,7 @@ textarea {
 }
 
 .leftarea {
-	width: 40%;
+	width: 99%; /* width: 40%; */
 	float: left;
 	height: 99%;
 }
