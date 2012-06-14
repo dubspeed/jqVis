@@ -59,16 +59,16 @@ TestCase ("jqVisTest", {
 	},
 	
 	"test should mark a query": function() {
-		var html = "<html><body><p id='test'>test</p></body></html>";
-		var mark = "__BOM__";
+		var html = "<div><p id='test'>test</p></div>";
+		var mark = "<mark>";
 		jqvis.setHTML(html);
 		jqvis.query("p#test", mark);
-		assert($("#test", jqvis.getDOM()).hasClass(mark));
+		assertObject($("mark", jqvis.getDOM())[0]);
 	},
 	
 	"test should remove all marks from html": function() {
 		var html = "<html><body><p class='__B__'>test</p><p class='__B__'>foo</p></body></html>";
-		var mark = "__B__";
+		var mark = "<mark>";
 		jqvis.setHTML(html);
 		jqvis.clear(mark);
 		assertFalse($("p", jqvis.getDOM()).hasClass(mark))
@@ -76,9 +76,9 @@ TestCase ("jqVisTest", {
 	
 	"test ascii html should reflect DOM manipulation": function() {
 		var html = "<html><body><p id='test'>test</p></body></html>";
-		var mark = "__BOM__";
+		var mark = "<mark>";
 		// <html><body> gets stripped when using <div> instead of iframe!
-		var markedHtml = "<p class=\"__BOM__\" id=\"test\">test</p>";
+		var markedHtml = "<mark><p id=\"test\">test</p></mark>";
 		jqvis.setHTML(html);
 		jqvis.query("p#test", mark);
 		assertEquals(markedHtml, jqvis.getHTML());
@@ -91,8 +91,8 @@ TestCase ("jqVisTest", {
 	},
 	*/
 	"test should return all line-numbers where matching class __B__ items are found": function() {
-		var html = "<html>\n<body>\n<p class='__B__'>test</p>\n<p class='__B__'>foo</p>\n</body>\n</html>\n";
-		var mark = "__B__";
+		var html = "<html>\n<body>\n<mark><p>test</p></mark>\n<mark><p>foo</p></mark>\n</body>\n</html>\n";
+		var mark = "<mark>";
 		jqvis.setHTML(html);
 		var result = jqvis.getLines(mark);
 		assertArray(result);
@@ -102,7 +102,7 @@ TestCase ("jqVisTest", {
 	
 	"test getLines should work with multiple linesbreaks": function() {
 		var html = "<div>\nNot selected\n</div>\n<p>This\nis\nSparta!</p>\n";
-		var mark = "__B__";
+		var mark = "<mark>";
 		jqvis.setHTML(html);
 		jqvis.query("p", mark);
 		var result = jqvis.getLines(mark);
@@ -117,8 +117,8 @@ TestCase ("jqVisTest", {
 		var result = jqvis.getLines(mark);
 		jstestdriver.console.log(jqvis.getHTML());
 		assertEquals(-1, jqvis.getHTML().indexOf(mark));
-		//assertEquals(-1, jqvis.getHTML().indexOf("mark"));
-		//assertEquals(html, jqvis.getHTML());
+		assertEquals(-1, jqvis.getHTML().indexOf("mark"));
+		assertEquals(html, jqvis.getHTML());
 	}
 	
 	

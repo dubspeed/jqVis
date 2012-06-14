@@ -32,12 +32,12 @@ namespace("jqvis");
 		},
 		
 		query = function(q, mark) {
-			$(q, getDOM()).addClass(mark);
+			$(q, getDOM()).wrap(mark);
 			updateHTMLfromDOM();
 		},
 		
 		clear = function(mark) {
-			$("." + mark, getDOM()).removeClass(mark);
+			$(mark, getDOM()).unwrap(mark);
 			updateHTMLfromDOM();
 		},
 		
