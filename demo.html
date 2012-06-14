@@ -6,34 +6,58 @@
 	<script src="lib/mode/xml/xml.js"></script>
     <script src="lib/mode/javascript/javascript.js"></script>
     <script src="lib/mode/css/css.js"></script>
-    <script src="htmlmixed.js"></script>
+    <script src="lib/mode/htmlmixed/htmlmixed.js"></script>
 	<script src="lib/jquery_1.7.2_dev.js" type="text/javascript" charset="utf-8"></script>
+	<script src="src/dub.js" type="text/javascript" charset="utf-8"></script>
 	<script src="src/jqvis.js" type="text/javascript" charset="utf-8"></script>
-	<script src="src/model.js" type="text/javascript" charset="utf-8"></script>
-	<script src="src/controller.js" type="text/javascript" charset="utf-8"></script>
-	<script src="src/demo.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+            var editor = CodeMirror.fromTextArea($("#editor")[0], {
+                lineNumbers : true,
+                matchBrackets : true
+            }),
+
+            vis = Object.create(jqvis),
+            
+            lastMarker = undefined,
+            
+            clearMarkers = function() {
+                 if (lastMarker) {
+                     for (var i=0; i<lastMarker.length; i += 1) {
+                         editor.clearMarker(lastMarker[i]);
+                     }
+                 }             
+            },
+
+            setMarkers = function(lines) {
+                 lastMarker = lines;
+                 for (var i=0; i<lines.length; i += 1) {
+                     editor.setMarker(lines[i], "<div class='highlight_line'>%N%</div>"); //, className)
+                 }
+            },
+            
+			queryEvent = function(evt) {
+			     evt.preventDefault();
+			     clearMarkers();
+			     vis.setHTML(editor.getValue());
+			     vis.query($("#query").val());
+			     setMarkers(vis.getLines());
+			};
+
+            vis.setMark("<mark>", "</mark>");
+
+			$("#submit").bind("click", queryEvent);
+		});
+	</script>
 </head>
 <body>
     <header class="softshadow">
         <h1>JQuery Visualizer</h1>
-        <ul class="mainmenu group">
-            <li id="menu_load" class="button softshadow">load</li>
-            <li id="menu_edit" class="button softshadow">edit</li>
-        </ul>
     </header>
 
-    <div id="load">
-       <h2>load a file</h2>
-       <a href="#" class="button">load</a>
-        <form>
-            <label for="filename">select file</label>
-            <input type="file" name="filename" id="filename"/>
-        </form>
-    </div>
-
-    <section id="querysection" class="section softshadow">
-        <div><textarea id="query" cols="50">$('');</textarea></div>
-        <div><span id="submit" class="button">query</span></div>
+    <section id="querysection">
+        <textarea id="query" cols="50">$('');</textarea>
+        <div id="submit" class="button">query</div>
     </section>
     
     <div class="rows">

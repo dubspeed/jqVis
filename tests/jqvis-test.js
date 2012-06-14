@@ -60,19 +60,19 @@ TestCase ("jqVisTest", {
 	
 	"test should mark a query": function() {
 		var html = "<div><p id='test'>test</p></div>";
-		var mark = "<mark>";
 		jqvis.setHTML(html);
-		jqvis.query("p#test", mark);
+		jqvis.setMark("<mark>","</mark>");
+		jqvis.query("p#test");
 		assertObject($("mark", jqvis.getDOM())[0]);
 	},
 	
 	"test ascii html should reflect DOM manipulation": function() {
 		var html = "<html><body><p id='test'>test</p></body></html>";
-		var mark = "<mark>";
 		// <html><body> gets stripped when using <div> instead of iframe!
 		var markedHtml = "<mark><p id=\"test\">test</p></mark>";
 		jqvis.setHTML(html);
-		jqvis.query("p#test", mark);
+		jqvis.setMark("<mark>","</mark>");
+		jqvis.query("p#test");
 		assertEquals(markedHtml, jqvis.getHTML());
 	},
 	
@@ -127,9 +127,8 @@ TestCase ("jqvis.GetLineTsts", {
 	
 	"test should return all line-numbers where matching 'mark'": function() {
 		var html = "<html>\n<body>\n<mark><p>test</p></mark>\n<mark><p>foo</p></mark>\n</body>\n</html>\n";
-		var mark = "<mark>";
 		this.vis.setHTML(html);
-		var result = this.vis.getLines(mark);
+		var result = this.vis.getLines();
 		assertArray(result);
 		assertEquals(2, result.length);
 		assertEquals([2,3], result);
@@ -137,20 +136,19 @@ TestCase ("jqvis.GetLineTsts", {
 	
 	"test getLines should work with multiple linesbreaks": function() {
 		var html = "<div>\nNot selected\n</div>\n<p>This\nis\nSparta!</p>\n";
-		var mark = "<mark>";
 		this.vis.setHTML(html);
-		this.vis.query("p", mark);
-		var result = this.vis.getLines(mark);
+		this.vis.setMark("<mark>","</mark>");
+		this.vis.query("p");
+		var result = this.vis.getLines();
 		assertEquals([3,4,5], result);
 	},
 	
 	"test no markers are left in html code after query": function() {
 		var html = "<div>\nNot selected\n</div>\n<p>This\nis\nSparta!</p>\n";
-		var mark = "<mark>";
+		this.vis.setMark("<mark>","</mark>");
 		this.vis.setHTML(html);
-		this.vis.query("p", mark);
-		var result = this.vis.getLines(mark);
-		assertEquals(-1, this.vis.getHTML().indexOf(mark));
+		this.vis.query("p");
+		this.vis.getLines();
 		assertEquals(-1, this.vis.getHTML().indexOf("mark"));
 		assertEquals(html, this.vis.getHTML());
 	}

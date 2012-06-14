@@ -9,28 +9,28 @@ header {
 }
 
 header h1 {
-    padding: 5px 5px 5px 5px;  
+    padding: 5px 5px 5px 5px;
+    text-align: right;  
 }
 
-.mainmenu {
-    list-style-type: none;
-    float: right;
-    position: relative;
-    top: -75px;
-    
+textarea {
+    width: 100%;
 }
-.mainmenu li {
-	margin: 10px 10px 10px 10px;
-    float: left;
+
+#query {
+	border-radius: 5px;
+	background-color: #eeeeee;
 }
 
 .button {
-	padding: 10px 20px 10px 20px;
+	padding: 5px 10px 5px 10px;
+	margin: 5px 10px 5px 10px;
     background-color: #CCCCCC;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
-    color: #FFFFFF;
+    color: #F0F0FF;
+    text-align: center;
 }
 
 .softshadow {
@@ -42,11 +42,6 @@ header h1 {
 .section {
 	background-color: #F0EEEE;
 	padding: 25px 5px 5px 5px;
-}
-
-section textarea {
-	rows: 100;
-	resize: none;
 }
 
 .rows {

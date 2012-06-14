@@ -34,13 +34,13 @@ namespace("jqvis");
 			_html = $(_DOM).html();
 		},
 		
-		query = function(q, mark) {
-			$(q, getDOM()).wrap(mark);
+		query = function(q) {
+			$(q, getDOM()).wrap(_openMark);
 			updateHTMLfromDOM();
 		},
 		
-		clear = function(mark) {
-			html = $(mark, getDOM()).children().unwrap(mark);
+		clear = function() {
+			html = $(_markTag, getDOM()).children().unwrap(_openMark);
 			updateHTMLfromDOM();
 		},
 		
@@ -93,10 +93,14 @@ namespace("jqvis");
 	jqvis.getHTML = gethtml;
 	jqvis.getDOM = getDOM;
 	jqvis.query = query;
+	jqvis.setMark = setMark;
+	jqvis.getLines = getLines;
+	
+	// Pseudo-Private API
 	jqvis.clear = clear;
 	jqvis.getLines = getLines;
-	jqvis.setMark = setMark;
 	jqvis.getOpenMark = function() { return _openMark};
 	jqvis.getCloseMark = function() { return _closeMark};
 	jqvis.getMarkTag = function() { return _markTag};
 }());
+
