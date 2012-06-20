@@ -2,6 +2,16 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="lib/codemirror.css">
 	<link rel="stylesheet" type="text/css" href="jqvis.css"></link>
+	<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */</script>
 	<script src="lib/codemirror.js"></script>
 	<script src="lib/mode/xml/xml.js"></script>
     <script src="lib/mode/javascript/javascript.js"></script>
@@ -42,26 +52,48 @@
 			     vis.setHTML(editor.getValue());
 			     vis.query($("#query").val());
 			     setMarkers(vis.getLines());
+			},
+			
+			toggleHover = function(evt) {
+			     $(this).toggleClass("button_hover");          
 			};
 
             vis.setMark("<mark>", "</mark>");
 
 			$("#submit").bind("click", queryEvent);
+			$("#submit").bind("hover", toggleHover);
 		});
 	</script>
 </head>
 <body>
     <header class="softshadow">
         <h1>JQuery Visualizer</h1>
+		<div id="flattr">
+			<a class="FlattrButton" style="display: none;"
+				href="http://jqvis.dubspeed.de"></a>
+			<noscript>
+				<a href="http://flattr.com/thing/720580/JQVis" target="_blank">
+					<img src="http://api.flattr.com/button/flattr-badge-large.png"
+					alt="Flattr this" title="Flattr this" border="0" />
+				</a>
+			</noscript>
+		</div>
+		<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+    
     </header>
 
     <section id="querysection">
-        <textarea id="query" cols="50">$('');</textarea>
-        <div id="submit" class="button">query</div>
+        <p>This tool lets you see your jQuery-query results by highlighting the markup you provide in the edit below. 
+        Please try it! Paste your code in the editor below, enter your query as jQuery selector and see the magic happen! 
+        Examples are: <code>p</code>, <code>p:first</code>, <code>li:last</code>, <code>p#id</code> or <code>p.class</code>.
+        <a href="">Check out my blogpost discussing this project</a> or
+        <a href="http://api.jquery.com/category/selectors/">Learn more about jQuery selectors.</a></p>
+        <div id="submit" class="button softshadow">query</div>
+		<textarea id="query">p</textarea>
     </section>
     
     <div class="rows">
-        <div class="section softshadow leftarea">
+        <div class="section leftarea">
             <form>
             <textarea id="editor" name="editor">
             
@@ -71,9 +103,9 @@
   </head>
   <body>
     <h1>HTML Example</h1>
-    <p>This is a nice text paragraph</p>
+    <p id="para">This is a nice text paragraph</p>
     <p>Another paragrpah, this time with div insdide
-       <div>a div</div> <div> another</div><br/>
+       <div class="klass">a div</div> <div> another</div><br/>
        <strong>huhu</strong><br/>
     </p>
     <ul>
