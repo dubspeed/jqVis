@@ -129,11 +129,11 @@ nav ul li {
 	display: inline;   /* fixes list-stlye-type: none */
 	padding: 0.2em 1em 0.2em 1em;
 	background-color: #55BEF8;
-    background-image: -o-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: -moz-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: -webkit-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: -ms-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
+    background-image: -o-linear-gradient(-90deg , rgb(209,234,252) 0%, rgb(228,228,228) 100%);
+    background-image: -moz-linear-gradient(-90deg , rgb(209,234,252) 0%, rgb(228,228,228) 100%);
+    background-image: -webkit-linear-gradient(-90deg , rgb(209,234,252) 0%, rgb(228,228,228) 100%);
+    background-image: -ms-linear-gradient(-90deg , rgb(209,234,252) 0%, rgb(228,228,228) 100%);
+    background-image: linear-gradient(-90deg , rgb(209,234,252) 0%, rgb(228,228,228) 100%);
     border: 1px solid;
     border-bottom-style: none;
     
