@@ -26,6 +26,11 @@ section {
 	width: 100%;
 }
 
+footer {
+	text-align: center;
+	background-color: #65BBEF;
+	margin-top: 0.5em;
+}
 
 #query {
 	width: inherit;
@@ -93,24 +98,9 @@ section {
 	margin-top: 25px;
 }
 
-.leftarea {
-	width: 99%; /* width: 40%; */
-	float: left;
-	height: 99%;
-	background-color: #e4e4e4;
-}
-.rightarea {
-	float: right;
-	width: 55%;
-}
-.rightarea iframe {
-	width: 99%;
-	height: 100%;
-}
-
-.leftarea #editor {
-	float: none;
-	width: 100%;
+.main_content {
+	margin-top: 1em;
+    background-color: #e4e4e4;
 }
 
 .highlight_line {
