@@ -7,6 +7,7 @@ namespace("jqvis");
 		_openMark = undefined,
 		_closeMark = undefined,
 		_markTag = undefined,
+		_lastError = null,
 		
 		sethtml = function(html) {
 			if (typeof html !== "string") {
@@ -38,10 +39,10 @@ namespace("jqvis");
 			try {
 				$(q, getDOM()).wrap(_openMark);
 			} catch (e) {
-				lastError = e;
+				_lastError = e;
 				return;
 			}
-			lastError = null;
+			_lastError = null;
 			updateHTMLfromDOM();
 		},
 		
@@ -94,10 +95,8 @@ namespace("jqvis");
 			_markTag = _openMark.substr(1, _openMark.length - 2);
 		},
 		
-		lastError = null,
-		
 		getLastError = function () {
-			return lastError;
+			return _lastError;
 		};
 	
 	// Public API

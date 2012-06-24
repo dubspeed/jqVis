@@ -22,11 +22,15 @@
 	<script src="src/jqvis.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
-            var editor = CodeMirror.fromTextArea($("#editor")[0], {
-                lineNumbers : true,
-                matchBrackets : true
-            }),
+            var editor = undefined,
 
+            createEditor = function() {
+            	editor = CodeMirror.fromTextArea($("#editor")[0], {
+                    lineNumbers : true,
+                    matchBrackets : true
+                });
+            },
+            
             message = $("section p.message"), 
             
             vis = Object.create(jqvis),
@@ -48,27 +52,36 @@
                  }
             },
             
+            showResult = function(lines) {
+                if (vis.getLastError() !== null) {
+                    message.text(vis.getLastError());
+                    message.slideDown();
+                 } else if (lines.length == 0) {
+                     message.text("Your query did not return any valid results")
+                     message.slideDown();    
+                 } else {
+                     message.slideUp();
+                     setMarkers(lines);
+                 }
+            },
+            
 			queryEvent = function(evt) {
-            	 var lines = [];
             	 evt.preventDefault();
 			     clearMarkers();
 			     vis.setHTML(editor.getValue());
 			     vis.query($("#query").val());
-			     lines = vis.getLines();
-			     if (vis.getLastError() !== null) {
-			    	message.text(vis.getLastError());
-			    	message.slideDown();
-			     } else if (lines.length == 0) {
-			    	 message.text("Your query did not return any valid results")
-			    	 message.slideDown();	 
-			     } else {
-			    	 message.slideUp();
-			         setMarkers(lines);
-			     }
+			     showResult(vis.getLines());
 			},
 			
 			toggleHover = function(evt) {
 			     $(this).toggleClass("button_hover");          
+			},
+			
+			loadExampleFile = function(name) {
+				var xmlReq = $.get (name).success(function(data) {
+	                $("textarea#editor").text(xmlReq.responseText);
+	                createEditor();
+	            });
 			};
 
             vis.setMark("<mark>", "</mark>");
@@ -76,6 +89,8 @@
 			$("#submit").bind("click", queryEvent);
 			$("#submit").bind("hover", toggleHover);
 			message.hide();
+			loadExampleFile("example.html");
+			
 		});
 	</script>
 </head>
@@ -119,35 +134,6 @@
         <div class="solid_border leftarea">
             <form>
             <textarea id="editor" name="editor">
-            
-  <html>
-  <head>
-    <title>Simple</title>
-  </head>
-  <body>
-    <h1>HTML Example</h1>
-    <p id="para">This is a nice text paragraph</p>
-    <p>This is another paragraph, stretching over multiple
-       lines in the sourc <strong>code</strong> and having
-       multiple <strong>HTML</strong>-elements like
-       <a href="#">Links</a> inside<br/>
-    </p>
-    <p>
-      <div>Divs</div> inside paragraphs work poorly, as you can see
-      because it violates
-      HTML standards. Browsers silently reformat it as: 
-      <p>First part</p><div>div</div><p>Second part</p>
-      what explains the gaps in this selection of 'p'.
-    </p>
-    <ul>
-    <li>one</li>
-    <li>two</li>
-    <li>three</li>
-    </ul>
-  </body>
-</html>
-    
-            
             
             </textarea>
             </form>
