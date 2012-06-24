@@ -55,7 +55,11 @@
 			     vis.setHTML(editor.getValue());
 			     vis.query($("#query").val());
 			     lines = vis.getLines();
-			     if (lines.length == 0) {
+			     if (vis.getLastError() !== null) {
+			    	message.text(vis.getLastError());
+			    	message.slideDown();
+			     } else if (lines.length == 0) {
+			    	 message.text("Your query did not return any valid results")
 			    	 message.slideDown();	 
 			     } else {
 			    	 message.slideUp();
@@ -107,7 +111,7 @@
     </section>
     
     <section>
-        <p class="message solid_border softshadow">Your query did not return any valid results</p>
+        <p class="message solid_border softshadow"></p>
     </section>
     
    

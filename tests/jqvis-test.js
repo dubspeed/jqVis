@@ -104,7 +104,7 @@ TestCase ("jqvis.setMarkTests", {
 	}
 });
 
-TestCase ("jqvis.GetLineTsts", {
+TestCase ("jqvis.GetLineTests", {
 	setUp: function() {
 		this.vis = Object.create(jqvis);
 		this.html = "<p>test\n<div>div</div><div>another</div><br/>\n</p>"
@@ -155,6 +155,25 @@ TestCase ("jqvis.GetLineTsts", {
 		assertEquals(html, this.vis.getHTML());
 	},
 	
-	
-
 });
+
+TestCase ("ErrorHandling-Tests", {
+	setUp: function() {
+		this.vis = Object.create(jqvis);
+		this.html = "<p>test\n<div>div</div><div>another</div><br/>\n</p>"
+		this.vis.setHTML(this.html);
+		this.vis.setMark("<mark>","</mark>");
+	},
+
+	"test should return last error": function() {
+		this.vis.query("p:foo");
+		assertNotNull(this.vis.getLastError());
+		assertEquals("Error: Syntax error, unrecognized expression: foo", this.vis.getLastError());
+	},
+	
+	"test should return null if no error": function () {
+		this.vis.query("p");
+		assertNull(this.vis.getLastError());
+	}
+});
+

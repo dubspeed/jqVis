@@ -35,7 +35,13 @@ namespace("jqvis");
 		},
 		
 		query = function(q) {
-			$(q, getDOM()).wrap(_openMark);
+			try {
+				$(q, getDOM()).wrap(_openMark);
+			} catch (e) {
+				lastError = e;
+				return;
+			}
+			lastError = null;
 			updateHTMLfromDOM();
 		},
 		
@@ -86,6 +92,12 @@ namespace("jqvis");
 			_openMark = sMark;
 			_closeMark = eMark;
 			_markTag = _openMark.substr(1, _openMark.length - 2);
+		},
+		
+		lastError = null,
+		
+		getLastError = function () {
+			return lastError;
 		};
 	
 	// Public API
@@ -95,6 +107,7 @@ namespace("jqvis");
 	jqvis.query = query;
 	jqvis.setMark = setMark;
 	jqvis.getLines = getLines;
+	jqvis.getLastError = getLastError;
 	
 	// Pseudo-Private API
 	jqvis.clear = clear;
