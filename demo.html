@@ -33,6 +33,8 @@
             
             message = $("section p.message"), 
             
+            tabs = $("#tabs").children(),
+            
             vis = Object.create(jqvis),
             
             lastMarker = undefined,
@@ -66,15 +68,19 @@
             },
             
 			queryEvent = function(evt) {
-            	 evt.preventDefault();
-			     clearMarkers();
-			     vis.setHTML(editor.getValue());
-			     vis.query($("#query").val());
-			     showResult(vis.getLines());
+            	evt.preventDefault();
+			    clearMarkers();
+			    vis.setHTML(editor.getValue());
+			    vis.query($("#query").val());
+			    showResult(vis.getLines());
 			},
 			
-			toggleHover = function(evt) {
-			     $(this).toggleClass("button_hover");          
+			toggleButtonHover = function(evt) {
+			    $(this).toggleClass("button_hover");          
+			},
+			
+			toggleNavHover = function(evt) {
+				$(this).toggleClass("nav_hover");
 			},
 			
 			loadExampleFile = function(name) {
@@ -82,14 +88,28 @@
 	                $("textarea#editor").text(xmlReq.responseText);
 	                createEditor();
 	            });
+			},
+			
+			showTabEvent = function (evt) {
+				evt.preventDefault();
+				var id = $(this).val()
+				tabs.hide();
+			    $(tabs[id]).show();
 			};
 
             vis.setMark("<mark>", "</mark>");
 
 			$("#submit").bind("click", queryEvent);
-			$("#submit").bind("hover", toggleHover);
+			$("#submit").bind("hover", toggleButtonHover);
 			message.hide();
 			loadExampleFile("example.html");
+			
+			$("nav li").bind("hover", toggleNavHover);
+			$("nav li").bind("click", showTabEvent);
+			
+			tabs.hide(); // hide all tabs
+			tabs.first().show();     // show first
+			
 			
 		});
 	</script>
@@ -121,18 +141,27 @@
 	</section>
        
     <section>
-        <div id="submit" class="button softshadow">query</div>
+        <div id="submit" class="button button_text softshadow">query</div>
         <textarea id="query">p</textarea>
     </section>
     
     <section>
         <p class="message solid_border softshadow"></p>
     </section>
-    
-   
-    <section class="main_content">
+
+	<nav class="group button_text">
+		<ul>
+			<li value="0">Source</li>
+			<li value="1">Render</li>
+		</ul>
+	</nav>
+	
+	<section class="main_content" id="tabs">
         <div class="solid_border">
             <textarea id="editor"></textarea>
+        </div>
+        <div class="solid_border">
+            <iframe id="render"></iframe>
         </div>
     </section>
 
