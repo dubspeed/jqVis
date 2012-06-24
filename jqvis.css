@@ -134,3 +134,65 @@ header h1 {
 .group {
 	zoom: 1; /* IE6&7 */
 }
+
+/* Iphone 4s: Portrait mode*/
+@media screen and (orientation: portrait) and (max-width: 1024px) {
+	body {
+        font-size: 3em;	
+	}
+	header {
+		position: relative;
+		width: 100%;
+	}
+	header h1 {
+		font-size: 2.25em;
+		margin-top: 0.25em;
+	}
+	#querysection {
+		margin-top: 0.25em;
+	}
+	.button {
+		width: 98%;
+		margin-left: 1%;
+		font-size: inherit;
+	}
+	#query {
+		width: 98%;
+		font-size: inherit;
+		margin-left: 1%;
+	}
+	.CodeMirror {
+		font-size: 1.25em;
+	}
+}
+
+/* iPhone 4s Landscape mode */
+@media screen and (orientation: landscape) and (max-width: 1024px) {
+	body {
+		font-size: 1.25em;
+	}
+	header {
+		position: relative;
+		width: 100%;
+	}
+	header h1 {
+		font-size: 2.25em;
+		margin-top: 0.25em;
+	}
+	#querysection {
+		margin-top: 0.25em;
+	}
+	.button {
+		width: 98%;
+		margin-left: 1%;
+		font-size: 2em;
+	}
+	#query {
+		width: 98%;
+		font-size: 2em;
+		margin-left: 1%;
+	}
+	.CodeMirror {
+		font-size: 1.25em;
+	}
+}

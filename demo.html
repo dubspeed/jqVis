@@ -2,7 +2,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="lib/codemirror.css">
 	<link rel="stylesheet" type="text/css" href="jqvis.css"></link>
-	<script type="text/javascript">
+    <script type="text/javascript">
 /* <![CDATA[ */
     (function() {
         var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
@@ -12,7 +12,7 @@
         t.parentNode.insertBefore(s, t);
     })();
 /* ]]> */</script>
-	<script src="lib/codemirror.js"></script>
+    <script src="lib/codemirror.js"></script>
 	<script src="lib/mode/xml/xml.js"></script>
     <script src="lib/mode/javascript/javascript.js"></script>
     <script src="lib/mode/css/css.js"></script>
@@ -79,7 +79,6 @@
 			</noscript>
 		</div>
 		<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
-    
     </header>
 
     <section id="querysection">
@@ -104,9 +103,17 @@
   <body>
     <h1>HTML Example</h1>
     <p id="para">This is a nice text paragraph</p>
-    <p>Another paragrpah, this time with div insdide
-       <div class="klass">a div</div> <div> another</div><br/>
-       <strong>huhu</strong><br/>
+    <p>This is another paragraph, stretching over multiple
+       lines in the sourc <strong>code</strong> and having
+       multiple <strong>HTML</strong>-elements like
+       <a href="#">Links</a> inside<br/>
+    </p>
+    <p>
+      <div>Divs</div> inside paragraphs work poorly, as you can see
+      because it violates
+      HTML standards. Browsers silently reformat it as: 
+      <p>First part</p><div>div</div><p>Second part</p>
+      what explains the gaps in this selection of 'p'.
     </p>
     <ul>
     <li>one</li>

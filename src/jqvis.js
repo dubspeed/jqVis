@@ -98,7 +98,6 @@ namespace("jqvis");
 	
 	// Pseudo-Private API
 	jqvis.clear = clear;
-	jqvis.getLines = getLines;
 	jqvis.getOpenMark = function() { return _openMark};
 	jqvis.getCloseMark = function() { return _closeMark};
 	jqvis.getMarkTag = function() { return _markTag};

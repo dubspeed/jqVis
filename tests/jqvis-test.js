@@ -107,6 +107,8 @@ TestCase ("jqvis.setMarkTests", {
 TestCase ("jqvis.GetLineTsts", {
 	setUp: function() {
 		this.vis = Object.create(jqvis);
+		this.html = "<p>test\n<div>div</div><div>another</div><br/>\n</p>"
+			
 	},
 	
 	"test should throw if no mark is set": function () {
@@ -151,6 +153,8 @@ TestCase ("jqvis.GetLineTsts", {
 		this.vis.getLines();
 		assertEquals(-1, this.vis.getHTML().indexOf("mark"));
 		assertEquals(html, this.vis.getHTML());
-	}
+	},
+	
+	
 
 });
