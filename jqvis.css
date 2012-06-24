@@ -111,19 +111,11 @@ iframe {
 
 /* disable border for the nav-bar on first div in content */
 .main_content div {
-	border-top-style: none;
+	/*border-top-style: none;*/
 }
 
 nav {
 	margin-top: 0.5em;
-	background-color: #55BEF8;
-    background-image: -o-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: -moz-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: -webkit-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: -ms-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-    background-image: linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
-	border: 1px solid;
-	border-bottom-style: none;
 }
 
 nav ul {
@@ -135,7 +127,31 @@ nav ul {
 nav ul li {
 	float: left;
 	display: inline;   /* fixes list-stlye-type: none */
-	padding: 1em;
+	padding: 0.2em 1em 0.2em 1em;
+	background-color: #55BEF8;
+    background-image: -o-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
+    background-image: -moz-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
+    background-image: -webkit-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
+    background-image: -ms-linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
+    background-image: linear-gradient(-90deg , rgb(51,204,255) 0%, rgb(228,228,228) 100%);
+    border: 1px solid;
+    border-bottom-style: none;
+    
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+    /* Position 1 px below to cover the border */
+    border-bottom-style: none;
+    position:relative;
+    top: 1px;
+}
+
+.nav_selected {
+	border: 2px dotted;
+	border-bottom-style:none;
 }
 
 .nav_hover {

@@ -95,6 +95,8 @@
 				var id = $(this).val()
 				tabs.hide();
 			    $(tabs[id]).show();
+			    $("nav li").removeClass("nav_selected");
+			    $(this).toggleClass("nav_selected");
 			};
 
             vis.setMark("<mark>", "</mark>");
