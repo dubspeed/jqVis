@@ -27,6 +27,8 @@
                 matchBrackets : true
             }),
 
+            message = $("section p.message"), 
+            
             vis = Object.create(jqvis),
             
             lastMarker = undefined,
@@ -47,11 +49,18 @@
             },
             
 			queryEvent = function(evt) {
-			     evt.preventDefault();
+            	 var lines = [];
+            	 evt.preventDefault();
 			     clearMarkers();
 			     vis.setHTML(editor.getValue());
 			     vis.query($("#query").val());
-			     setMarkers(vis.getLines());
+			     lines = vis.getLines();
+			     if (lines.length == 0) {
+			    	 message.slideDown();	 
+			     } else {
+			    	 message.slideUp();
+			         setMarkers(lines);
+			     }
 			},
 			
 			toggleHover = function(evt) {
@@ -62,6 +71,7 @@
 
 			$("#submit").bind("click", queryEvent);
 			$("#submit").bind("hover", toggleHover);
+			message.hide();
 		});
 	</script>
 </head>
@@ -80,19 +90,29 @@
 		</div>
 		<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
     </header>
-
-    <section id="querysection">
+ 
+    <div class="from_top"></div>
+ 
+    <section>
         <p>This tool lets you see your jQuery-query results by highlighting the markup you provide in the edit below. 
         Please try it! Paste your code in the editor below, enter your query as jQuery selector and see the magic happen! 
         Examples are: <code>p</code>, <code>p:first</code>, <code>li:last</code>, <code>p#id</code> or <code>p.class</code>.
         <a href="">Check out my blogpost discussing this project</a> or
         <a href="http://api.jquery.com/category/selectors/">Learn more about jQuery selectors.</a></p>
+	</section>
+       
+    <section>
         <div id="submit" class="button softshadow">query</div>
-		<textarea id="query">p</textarea>
+        <textarea id="query">p</textarea>
     </section>
     
+    <section>
+        <p class="message solid_border softshadow">Your query did not return any valid results</p>
+    </section>
+    
+   
     <div class="rows">
-        <div class="section leftarea">
+        <div class="solid_border leftarea">
             <form>
             <textarea id="editor" name="editor">
             
