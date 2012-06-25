@@ -1,14 +1,7 @@
 $(document).ready(function() {
 	
 	var editor = undefined,
-
-	createEditor = function() {
-		editor = CodeMirror.fromTextArea($("#editor")[0], {
-			lineNumbers : true,
-			matchBrackets : true
-		});
-	},
-
+	
 	message = $("section p.message"),
 
 	tabs = $("#tabs").children(),
@@ -33,7 +26,7 @@ $(document).ready(function() {
 																// className)
 		}
 	},
-
+	
 	showResult = function(lines) {
 		if (vis.getLastError() !== null) {
 			message.text(vis.getLastError());
@@ -47,6 +40,26 @@ $(document).ready(function() {
 		}
 	},
 
+	loadExampleFile = function(name) {
+		var xmlReq = $.get(name).success(function(data) {
+			$("textarea#editor").text(xmlReq.responseText);
+			createEditor();
+		});
+	},
+	
+	createEditor = function() {
+		editor = CodeMirror.fromTextArea($("#editor")[0], {
+			lineNumbers : true,
+			matchBrackets : true
+		});
+	},
+
+	showTab = function(tabNr) {
+		tabs.hide();
+		$(tabs[tabNr]).show();
+	},
+
+	/* Event handling */
 	queryEvent = function(evt) {
 		evt.preventDefault();
 		clearMarkers();
@@ -55,26 +68,11 @@ $(document).ready(function() {
 		showResult(vis.getLines());
 	},
 
-	toggleButtonHover = function(evt) {
-		$(this).toggleClass("button_hover");
-	},
-
-	toggleNavHover = function(evt) {
-		$(this).toggleClass("nav_hover");
-	},
-
-	loadExampleFile = function(name) {
-		var xmlReq = $.get(name).success(function(data) {
-			$("textarea#editor").text(xmlReq.responseText);
-			createEditor();
-		});
-	},
-
+	
 	showTabEvent = function(evt) {
 		evt.preventDefault();
 		var id = $(this).val()
-		tabs.hide();
-		$(tabs[id]).show();
+		showTab(id);
 		$("nav li").removeClass("nav_selected");
 		$(this).toggleClass("nav_selected");
 	};
@@ -84,14 +82,16 @@ $(document).ready(function() {
 	vis.setMark("<mark>", "</mark>");
 
 	$("#submit").bind("click", queryEvent);
-	$("#submit").bind("hover", toggleButtonHover);
+	$("#submit").bind("hover", function() {
+		$(this).toggleClass("button_hover");
+	});
+	$("nav li").bind("click", showTabEvent);
+	$("nav li").bind("hover", function() {
+		$(this).toggleClass("nav_hover");
+	});
+	
 	message.hide();
 	loadExampleFile("example.html");
-
-	$("nav li").bind("hover", toggleNavHover);
-	$("nav li").bind("click", showTabEvent);
-
-	tabs.hide(); // hide all tabs
-	tabs.first().show(); // show first
+	showTab(0);
 
 });
