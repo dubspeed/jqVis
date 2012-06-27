@@ -7,6 +7,8 @@ $(document).ready(function() {
 	tabs = $("#tabs").children(),
 
 	vis = Object.create(jqvis),
+	
+	iframe = $("iframe")[0].contentWindow.document;
 
 	lastMarker = undefined,
 
@@ -41,8 +43,10 @@ $(document).ready(function() {
 	},
 
 	loadExampleFile = function(name) {
-		var xmlReq = $.get(name).success(function(data) {
-			$("textarea#editor").text(xmlReq.responseText);
+		var xmlReq = $.get(name).success(function(xml_doc) {
+			var html = xmlReq.responseText
+			$("textarea#editor").text(html);
+			iframe.firstChild.innerHTML = html;
 			createEditor();
 		});
 	},

@@ -1,8 +1,19 @@
 <html>
 <head>
-<title>Simple</title>
+<title>Simple Example</title>
+<script src="lib/jquery_1.7.2_dev.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  // demonstrate dynamic content
+  console.log("huuh");
+  $(document).ready(function() {
+	  $("<p>This is a dynamicly created element, you can update the HTML to see it in the source</p>").appendTo($("p:first"));
+  });	  
+</script>
 </head>
 <body>
+    <script type="text/javascript">
+    console.log("huuh");
+    </script>
 	<h1>HTML Example</h1>
 	<p id="para">This is a nice text paragraph</p>
 	<p>
